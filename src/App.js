@@ -2,34 +2,52 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Albums from './pages/Albums';
-import Artists from './pages/Artists';
 import AlbumDetails from './pages/AlbumDetails';
+import Artists from './pages/Artists';
 import ArtistDetails from './pages/ArtistDetails';
+import AdminLogin from './admin/AdminLogin'; // Admin Login
+import AdminDashboard from './admin/AdminDashboard'; // Admin Dashboard
+import AdminAlbums from './admin/AdminAlbums';
+import AdminArtists from './admin/AdminArtists';
+import PrivateRoute from './components/PrivateRoute'; // Import PrivateRoute component
 
 function App() {
-  const sampleAlbum = {
-    title: 'Sample Album',
-    artist: 'Sample Artist',
-    releaseDate: '2023-01-01',
-    cover: '/path-to-cover-image.jpg',
-    tracks: ['Track 1', 'Track 2', 'Track 3'],
-  };
-
-  const sampleArtist = {
-    name: 'Sample Artist',
-    bio: 'This is a sample artist biography...',
-    image: '/path-to-artist-image.jpg',
-    albums: ['Album 1', 'Album 2', 'Album 3'],
-  };
-
   return (
     <Router>
       <Routes>
+        {/* Public Routes */}
         <Route path="/" element={<Home />} />
         <Route path="/albums" element={<Albums />} />
+        <Route path="/albums/:id" element={<AlbumDetails />} />
         <Route path="/artists" element={<Artists />} />
-        <Route path="/albums/:id" element={<AlbumDetails album={sampleAlbum} />} />
-        <Route path="/artists/:id" element={<ArtistDetails artist={sampleArtist} />} />
+        <Route path="/artists/:id" element={<ArtistDetails />} />
+
+        {/* Admin Routes */}
+        <Route path="/auth/login" element={<AdminLogin />} />
+        <Route
+          path="/admin/dashboard"
+          element={
+            <PrivateRoute>
+              <AdminDashboard />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/admin/albums"
+          element={
+            <PrivateRoute>
+              <AdminAlbums />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/admin/artists"
+          element={
+            <PrivateRoute>
+              <AdminArtists />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </Router>
   );
