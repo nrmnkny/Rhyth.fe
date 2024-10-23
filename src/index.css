@@ -1,7 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
+body {
+  font-family: 'Montserrat', sans-serif;
+}
 /* Custom glow effect */
 /* Subtle neon blue */
 .text-neon-blue {
@@ -34,9 +38,5 @@ select, button {
 }
 
 button {
-  background-color: #3498db;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease;
 }
